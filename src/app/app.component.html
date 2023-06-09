@@ -14,6 +14,7 @@
         <button
           class="btn btn-primary mx-1"
           title="Add New User"
+          (click)="openModal(template)"
         >
           <i class="bi bi-plus"></i>
         </button>
@@ -50,3 +51,54 @@
     </tbody>
   </table>
 </div>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">
+      Add New User
+    </h4>
+
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form action="#">
+      <input
+        type="text"
+        title="Full Name"
+        placeholder="Full Name"
+        class="form-control my-2"
+      >
+
+      <input
+        type="text"
+        title="Email"
+        placeholder="Email"
+        class="form-control my-2"
+      >
+
+      <input
+        type="text"
+        title="Company"
+        placeholder="Company"
+        class="form-control my-2"
+      >
+
+      <textarea
+        title="description"
+        class="form-control my-2"
+        placeholder="Description"
+      >
+
+      </textarea>
+
+      <button
+        title="Add New User"
+        class="btn btn-primary"
+        type="submit"
+      >
+        Add New User
+      </button>
+    </form>
+  </div>
+</ng-template>

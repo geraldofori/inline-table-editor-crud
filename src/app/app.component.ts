@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {User} from "./data/users/Users";
 import {UsersData} from "./data/users/UsersData";
+import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,14 @@ export class AppComponent implements OnInit{
 
   users: User[] = [];
 
-  constructor() {
+  modalRef?: BsModalRef;
+
+  constructor(private modalService: BsModalService) {
+
+  }
+
+  openModal(template: TemplateRef<any>){
+      this.modalRef = this.modalService.show(template);
   }
   ngOnInit() : void{
     this.users = UsersData;
@@ -19,3 +27,4 @@ export class AppComponent implements OnInit{
 
 
 }
+
