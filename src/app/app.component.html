@@ -62,12 +62,16 @@
     </button>
   </div>
   <div class="modal-body">
-    <form action="#">
+    <form
+      [formGroup]="form"
+      (ngSubmit)="addUser()"
+    >
       <input
         type="text"
         title="Full Name"
         placeholder="Full Name"
         class="form-control my-2"
+        formControlName="name"
       >
 
       <input
@@ -75,6 +79,7 @@
         title="Email"
         placeholder="Email"
         class="form-control my-2"
+        formControlName="email"
       >
 
       <input
@@ -82,12 +87,14 @@
         title="Company"
         placeholder="Company"
         class="form-control my-2"
+        formControlName="company"
       >
 
       <textarea
         title="description"
         class="form-control my-2"
         placeholder="Description"
+        formControlName="description"
       >
 
       </textarea>
@@ -96,6 +103,7 @@
         title="Add New User"
         class="btn btn-primary"
         type="submit"
+        [disabled]="form.invalid"
       >
         Add New User
       </button>

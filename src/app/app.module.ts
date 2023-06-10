@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {BsModalService, ModalModule} from "ngx-bootstrap/modal";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {BsModalService, ModalModule} from "ngx-bootstrap/modal";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ModalModule
+    ModalModule,
+    ReactiveFormsModule
   ],
   providers: [
     BsModalService
