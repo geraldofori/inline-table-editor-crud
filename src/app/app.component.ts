@@ -82,6 +82,20 @@ export class AppComponent implements OnInit{
 
 
   }
+
+  deleteUser(index: number){
+    if(confirm("Are you sure you want to delete this user?")) {
+      const user: User = this.users[index];
+
+      if(user != null) {
+        this.users.splice(index, 1);
+      }
+      else {
+        alert("User not found");
+      }
+    }
+
+  }
   ngOnInit() : void{
     this.users = UsersData;
   }
