@@ -16,6 +16,7 @@ export class AppComponent implements OnInit{
   modalRef?: BsModalRef;
 
   form = this.fb.group({
+    id: new FormControl<number | null>(null),
     name: new FormControl<string>('', [Validators.required]),
     email: new FormControl<string>('',[Validators.required, Validators.email]),
     description: new FormControl<string>(''),
@@ -27,25 +28,59 @@ export class AppComponent implements OnInit{
 
   }
 
-  openModal(template: TemplateRef<any>){
+  openModal(template: TemplateRef<any>, user?:User){
+    if(user != null){
+      this.form.patchValue({
+        id: user!.id,
+        name: user.name,
+        email: user.email,
+        description: user.description,
+        company: user.company
+      })
+    }else{
+      this.form.reset();
+    }
       this.modalRef = this.modalService.show(template);
   }
 
-  addUser(){
-    if(this.form.valid){
-      const user: User = {
-        id: this.users.length,
-        name: this.form.value.name,
-        email: this.form.value.email,
-        description: this.form.value.description,
-        company: this.form.value.company
-      } as User;
+  updateUser(){
+    if(this.form.value.id != null) {
+      if(this.form.valid){
+        const index: number = this.users.findIndex((user: User) => user.id === this.form.value.id);
 
-      this.users.push(user);
+        if (index !== -1) {
+          this.users[index] = {
+            id: this.form.value.id,
+            name: this.form.value.name,
+            email: this.form.value.email,
+            description: this.form.value.description,
+            company: this.form.value.company
+          } as User;
+        }
 
-      this.modalRef?.hide();
+        this.modalRef?.hide();
+
+      }
+    }else{
+      if(this.form.valid){
+        const user: User = {
+          id: this.users.length,
+          name: this.form.value.name,
+          email: this.form.value.email,
+          description: this.form.value.description,
+          company: this.form.value.company
+        } as User;
+
+        this.users.push(user);
+
+        this.modalRef?.hide();
+
+      }
+
 
     }
+
+
   }
   ngOnInit() : void{
     this.users = UsersData;
